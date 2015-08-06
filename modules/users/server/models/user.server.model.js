@@ -23,39 +23,9 @@ var validateLocalStrategyPassword = function (password) {
 };
 
 /**
- * A Validation function for local strategy email
- */
-var validateLocalStrategyEmail = function (email) {
-  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email));
-};
-
-/**
  * User Schema
  */
 var UserSchema = new Schema({
-  firstName: {
-    type: String,
-    trim: true,
-    default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your first name']
-  },
-  lastName: {
-    type: String,
-    trim: true,
-    default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your last name']
-  },
-  displayName: {
-    type: String,
-    trim: true
-  },
-  email: {
-    type: String,
-    trim: true,
-    unique: true,
-    default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
-  },
   username: {
     type: String,
     unique: 'Username already exists',
@@ -69,10 +39,6 @@ var UserSchema = new Schema({
   },
   salt: {
     type: String
-  },
-  profileImageURL: {
-    type: String,
-    default: 'modules/users/img/profile/default.png'
   },
   provider: {
     type: String,
@@ -100,6 +66,9 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  isActivated: {
+    type: Boolean
   }
 });
 

@@ -28,7 +28,6 @@ exports.signup = function (req, res) {
 
   // Add missing user fields
   user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
 
   // Then save the user
   user.save(function (err) {
@@ -153,16 +152,11 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         return done(err);
       } else {
         if (!user) {
-          var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+          var possibleUsername = providerUserProfile.username;
 
           User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
             user = new User({
-              firstName: providerUserProfile.firstName,
-              lastName: providerUserProfile.lastName,
               username: availableUsername,
-              displayName: providerUserProfile.displayName,
-              email: providerUserProfile.email,
-              profileImageURL: providerUserProfile.profileImageURL,
               provider: providerUserProfile.provider,
               providerData: providerUserProfile.providerData
             });
@@ -201,44 +195,4 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
       return done(new Error('User is already connected using this provider'), user);
     }
   }
-};
-
-/**
- * Remove OAuth provider
- */
-exports.removeOAuthProvider = function (req, res, next) {
-  var user = req.user;
-  var provider = req.query.provider;
-
-  if (!user) {
-    return res.status(401).json({
-      message: 'User is not authenticated'
-    });
-  } else if (!provider) {
-    return res.status(400).send();
-  }
-
-  // Delete the additional provider
-  if (user.additionalProvidersData[provider]) {
-    delete user.additionalProvidersData[provider];
-
-    // Then tell mongoose that we've updated the additionalProvidersData field
-    user.markModified('additionalProvidersData');
-  }
-
-  user.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      req.login(user, function (err) {
-        if (err) {
-          return res.status(400).send(err);
-        } else {
-          return res.json(user);
-        }
-      });
-    }
-  });
 };
