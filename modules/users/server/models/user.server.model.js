@@ -68,7 +68,8 @@ var UserSchema = new Schema({
     type: Date
   },
   isActivated: {
-    type: Boolean
+    type: Boolean,
+    default: 'false'
   }
 });
 
@@ -101,6 +102,14 @@ UserSchema.methods.hashPassword = function (password) {
 UserSchema.methods.authenticate = function (password) {
   return this.password === this.hashPassword(password);
 };
+
+/**
+ * Create instance method for authenticating user
+ */
+UserSchema.methods.isUserActivated = function () {
+  return this.isActivated;
+};
+
 
 /**
  * Find possible not used username

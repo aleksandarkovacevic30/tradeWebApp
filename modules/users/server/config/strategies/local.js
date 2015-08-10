@@ -20,10 +20,16 @@ module.exports = function () {
         if (err) {
           return done(err);
         }
-        if (!user || !user.authenticate(password)) {
-          return done(null, false, {
-            message: 'Invalid username or password'
-          });
+        if (!user || !user.authenticate(password) || !user.isUserActivated()) {
+          if (user && !user.isUserActivated()) {
+            return done(null, false, {
+              message: 'Username not activated yet. Please contact administrators to get your username activated.'
+            });            
+          } else {
+            return done(null, false, {
+              message: 'Invalid username or password'
+            });
+          }
         }
 
         return done(null, user);

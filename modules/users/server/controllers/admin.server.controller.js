@@ -23,7 +23,8 @@ exports.update = function (req, res) {
 
   //For security purposes only merge these parameters
   user.roles = req.body.roles;
-
+  user.isActivated = req.body.isActivated;
+  
   user.save(function (err) {
     if (err) {
       return res.status(400).send({

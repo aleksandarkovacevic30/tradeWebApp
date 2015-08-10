@@ -28,9 +28,7 @@ exports.forgot = function (req, res, next) {
     },
     // Lookup user by username
     function (token, done) {
-      console.log('check here! lookup username');      
       if (req.body.username) {
-              console.log('check here! lookup username, '+req.body.username);      
         User.findOne({
           username: req.body.username
         }, '-salt -password', function (err, user) {
@@ -58,7 +56,6 @@ exports.forgot = function (req, res, next) {
       }
     },
     function (token, user, done) {
-      console.log('check here! render email');
       res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
         name: user.displayName,
         appName: config.app.title,
@@ -69,7 +66,6 @@ exports.forgot = function (req, res, next) {
     },
     // If valid email, send reset email using service
     function (emailHTML, user, done) {
-      console.log('check here! send email');      
       var mailOptions = {
         to: user.email,
         from: config.mailer.from,
@@ -107,7 +103,6 @@ exports.validateResetToken = function (req, res) {
       $gt: Date.now()
     }
   }, function (err, user) {
-    console.log(user);
     if (!user) {
       return res.redirect('/password/reset/invalid');
     }

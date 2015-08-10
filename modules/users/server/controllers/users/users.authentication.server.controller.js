@@ -40,13 +40,19 @@ exports.signup = function (req, res) {
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function (err) {
+      // it should not automatically login, but wait for activation.
+      res.status(400).send({
+        message: 'thank you for signing up. Administrators will review your application and activate you as a user as soon as possible.'
+      });
+      
+/*      req.login(user, function (err) {
         if (err) {
           res.status(400).send(err);
         } else {
           res.json(user);
         }
-      });
+      });*/
+      
     }
   });
 };
