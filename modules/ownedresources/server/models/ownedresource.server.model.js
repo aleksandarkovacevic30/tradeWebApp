@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-var TradeSchema = new Schema({
+var OwnedresourceSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -27,30 +27,31 @@ var TradeSchema = new Schema({
     ref: 'User'
   }
 });
+
 /**
- * trade Schema
+ * ownedResource Schema
  */
-/*var TradeSchema = new Schema({
+/*var OwnedResourceSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
   },
-  state: {
-    type: String,
-    default: 'pending',
-    trim: true
+  count: {
+    type: Number,
+    default: 1
   },
-  ownedResource1: {
+  resource: {
     type: Schema.ObjectId,
-    ref: 'OwnedResource',
-    required: 'Owned Resource cannot be blank'
+    ref: 'Resource',
+    required: 'Resource cannot be blank'
   },
-  ownedResource2: {
+  user: {
     type: Schema.ObjectId,
-    ref: 'OwnedResource',
-    required: 'Owned Resource cannot be blank'
+    ref: 'User',
+    required: 'User cannot be blank'
   },
-});
-*/
+});*/
 
-mongoose.model('Trade', TradeSchema);
+
+//mongoose.model('OwnedResource', OwnedResourceSchema);
+mongoose.model('Ownedresource', OwnedresourceSchema);

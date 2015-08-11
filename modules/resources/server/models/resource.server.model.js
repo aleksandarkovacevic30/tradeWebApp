@@ -14,20 +14,16 @@ var ResourceSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
+  name: {
     type: String,
     default: '',
     trim: true,
-    required: 'Title cannot be blank'
+    required: 'Resource should have name'
   },
-  content: {
+  picture: {
     type: String,
     default: '',
-    trim: true
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    trim: true   
   }
 });
 

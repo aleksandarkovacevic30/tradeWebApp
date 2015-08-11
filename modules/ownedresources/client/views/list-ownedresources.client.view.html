@@ -1,0 +1,20 @@
+<section data-ng-controller="ownedresourcesController" data-ng-init="find()">
+  <div class="page-header">
+    <h1>ownedresources</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="ownedresource in ownedresources" data-ui-sref="ownedresources.view({ownedresourceId: ownedresource._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="ownedresource.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-bind="ownedresource.user.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="ownedresource.title"></h4>
+      <p class="list-group-item-text" data-ng-bind="ownedresource.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="ownedresources.$resolved && !ownedresources.length">
+    No ownedresources yet, why don't you <a data-ui-sref="ownedresources.create">create one</a>?
+  </div>
+</section>

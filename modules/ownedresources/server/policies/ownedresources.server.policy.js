@@ -9,38 +9,47 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Resources Permissions
+ * Invoke ownedresources Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['admin'],
     allows: [{
-      resources: '/api/resources',
+      resources: '/api/ownedresources',
       permissions: '*'
     }, {
-      resources: '/api/resources/:resourceId',
+      resources: '/api/ownedresources/:ownedresourceId',
       permissions: '*'
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/resources',
+      resources: '/api/ownedresources',
+      permissions: ['get', 'post']
+    }, {
+      resources: '/api/ownedresources/:ownedresourceId',
+      permissions: ['get']
+    }]
+  }, {
+    roles: ['guest'],
+    allows: [{
+      resources: '/api/ownedresources',
       permissions: ['get']
     }, {
-      resources: '/api/resources/:resourceId',
+      resources: '/api/ownedresources/:ownedresourceId',
       permissions: ['get']
     }]
   }]);
 };
 
 /**
- * Check If Resources Policy Allows
+ * Check If ownedresources Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an resource is being processed and the current user created it then allow any manipulation
-  if (req.resource && req.user && req.resource.user.id === req.user.id) {
+  // If an ownedresource is being processed and the current user created it then allow any manipulation
+  if (req.ownedresource && req.user && req.ownedresource.user.id === req.user.id) {
     return next();
   }
 
