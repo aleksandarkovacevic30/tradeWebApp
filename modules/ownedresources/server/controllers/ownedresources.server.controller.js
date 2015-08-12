@@ -6,14 +6,24 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Ownedresource = mongoose.model('Ownedresource'),
+  Resource = mongoose.model('Resource'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create a ownedresource
  */
 exports.create = function (req, res) {
-  var ownedresource = new Ownedresource(req.body);
+  var ownedresource = new Ownedresource({
+    amount: req.body.amount
+  });
+  var resource=Resource.findOne({name:req.body.name});
+  if (!resource) {
+    res.status(400).send({
+        message: 'Resource does not exist'
+      });
+  }
   ownedresource.user = req.user;
+  ownedresource.resource=resource;
 
   ownedresource.save(function (err) {
     if (err) {

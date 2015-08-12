@@ -1,37 +1,10 @@
 'use strict';
-
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
-
-var OwnedresourceSchema = new Schema({
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  title: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
-  },
-  content: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
-  }
-});
-
 /**
  * ownedResource Schema
  */
-/*var OwnedResourceSchema = new Schema({
+var OwnedresourceSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -50,7 +23,7 @@ var OwnedresourceSchema = new Schema({
     ref: 'User',
     required: 'User cannot be blank'
   },
-});*/
+});
 
 
 //mongoose.model('OwnedResource', OwnedResourceSchema);

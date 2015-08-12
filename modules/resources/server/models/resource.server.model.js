@@ -18,6 +18,7 @@ var ResourceSchema = new Schema({
     type: String,
     default: '',
     trim: true,
+    unique: 'Resource already exists',
     required: 'Resource should have name'
   },
   picture: {

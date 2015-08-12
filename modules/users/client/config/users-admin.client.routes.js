@@ -9,6 +9,11 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/views/admin/user-list.client.view.html',
         controller: 'UserListController'
       })
+      .state('admin.nonactivated', {
+        url: '/nonactusrs',
+        templateUrl: 'modules/users/views/admin/user-list-non-act.client.view.html',
+        controller: 'UserListController'
+      })    
       .state('admin.user', {
         url: '/users/:userId',
         templateUrl: 'modules/users/views/admin/user.client.view.html',

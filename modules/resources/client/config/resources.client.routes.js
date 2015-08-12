@@ -5,7 +5,7 @@ angular.module('resources').config(['$stateProvider',
   function ($stateProvider) {
     // Resources state routing
     $stateProvider
-      .state('admin.resources', {
+      .state('resources', {
         abstract: true,
         url: '/resources',
         template: '<ui-view/>',
@@ -13,19 +13,19 @@ angular.module('resources').config(['$stateProvider',
           roles: ['admin']
         }
       })
-      .state('admin.resources.list', {
+      .state('resources.list', {
         url: '',
         templateUrl: 'modules/resources/views/list-resources.client.view.html'
       })
-      .state('admin.resources.create', {
+      .state('resources.create', {
         url: '/create',
         templateUrl: 'modules/resources/views/create-resource.client.view.html'
       })
-      .state('admin.resources.view', {
+      .state('resources.view', {
         url: '/:resourceId',
         templateUrl: 'modules/resources/views/view-resource.client.view.html'
       })
-      .state('admin.resources.edit', {
+      .state('resources.edit', {
         url: '/:resourceId/edit',
         templateUrl: 'modules/resources/views/edit-resource.client.view.html'
       });

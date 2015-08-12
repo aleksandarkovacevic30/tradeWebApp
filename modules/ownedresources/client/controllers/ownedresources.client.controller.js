@@ -8,9 +8,10 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
     // Create new ownedresource
     $scope.create = function () {
       // Create new ownedresource object
+      
       var ownedresource = new Ownedresources({
-        title: this.title,
-        content: this.content
+        name: this.name,
+        amount: this.amount
       });
 
       // Redirect after save
@@ -18,8 +19,8 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
         $location.path('ownedresources/' + response._id);
 
         // Clear form fields
-        $scope.title = '';
-        $scope.content = '';
+        $scope.name = '';
+        $scope.amount = 0;
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

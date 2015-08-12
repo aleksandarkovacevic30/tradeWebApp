@@ -5,13 +5,13 @@
   <div class="list-group">
     <a data-ng-repeat="ownedresource in ownedresources" data-ui-sref="ownedresources.view({ownedresourceId: ownedresource._id})" class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
+        Created on
         <span data-ng-bind="ownedresource.created | date:'mediumDate'"></span>
         by
-        <span data-ng-bind="ownedresource.user.displayName"></span>
+        <span data-ng-bind="ownedresource.user.username"></span>
       </small>
-      <h4 class="list-group-item-heading" data-ng-bind="ownedresource.title"></h4>
-      <p class="list-group-item-text" data-ng-bind="ownedresource.content"></p>
+      <h4 class="list-group-item-heading" data-ng-bind="ownedresource.resource.name"></h4>
+      <p class="list-group-item-text" data-ng-bind="ownedresource.amount"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="ownedresources.$resolved && !ownedresources.length">

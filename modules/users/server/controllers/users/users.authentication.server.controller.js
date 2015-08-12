@@ -24,6 +24,8 @@ exports.signup = function (req, res) {
 
   // Init Variables
   var user = new User(req.body);
+  //take care that username is case insensitive
+  user.username=user.username.toLowerCase();
   var message = null;
 
   // Add missing user fields

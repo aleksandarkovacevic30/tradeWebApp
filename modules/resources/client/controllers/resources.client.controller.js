@@ -9,17 +9,17 @@ angular.module('resources').controller('ResourcesController', ['$scope', '$state
     $scope.create = function () {
       // Create new Resource object
       var resource = new Resources({
-        title: this.title,
-        content: this.content
+        name: this.name,
+        picture: this.picture
       });
 
       // Redirect after save
       resource.$save(function (response) {
-        $location.path('resources/' + response._id);
+        $location.path('resources');
 
         // Clear form fields
-        $scope.title = '';
-        $scope.content = '';
+        $scope.name = '';
+        $scope.picture = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

@@ -6,15 +6,17 @@
     <form name="ownedresourceForm" class="form-horizontal" data-ng-submit="create()" novalidate>
       <fieldset>
         <div class="form-group">
-          <label class="control-label" for="title">Title</label>
+          <label class="control-label" for="name">Resource</label>
           <div class="controls">
-            <input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title">
+            
+            <input name="name" type="text" data-ng-model="resource.name" id="name" class="form-control" placeholder="Resource Name"/>
+                    <!--ng-options="p.name for p in Projects | orderBy: 'name'"  ng-init="selectedProject.id=User.projectId" ng-required-->
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="content">Content</label>
+          <label class="control-label" for="amount">Amount</label>
           <div class="controls">
-            <textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+            <input name="amount" type="text" data-ng-model="amount" id="amount" class="form-control" cols="30" rows="10" placeholder="Amount"/>
           </div>
         </div>
         <div class="form-group">
