@@ -14,16 +14,10 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var ownedresource = new Ownedresource({
+    resource: req.body.resource,
     amount: req.body.amount
   });
-  var resource=Resource.findOne({name:req.body.name});
-  if (!resource) {
-    res.status(400).send({
-        message: 'Resource does not exist'
-      });
-  }
   ownedresource.user = req.user;
-  ownedresource.resource=resource;
 
   ownedresource.save(function (err) {
     if (err) {

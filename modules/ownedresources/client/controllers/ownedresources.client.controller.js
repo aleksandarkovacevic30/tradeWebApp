@@ -1,8 +1,8 @@
 'use strict';
 
 // ownedresources controller
-angular.module('ownedresources').controller('ownedresourcesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Ownedresources',
-  function ($scope, $stateParams, $location, Authentication, Ownedresources) {
+angular.module('ownedresources').controller('ownedresourcesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Ownedresources','Resources',
+  function ($scope, $stateParams, $location, Authentication, Ownedresources, Resources) {
     $scope.authentication = Authentication;
 
     // Create new ownedresource
@@ -10,7 +10,7 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
       // Create new ownedresource object
       
       var ownedresource = new Ownedresources({
-        name: this.name,
+        resource: this.resource,
         amount: this.amount
       });
 
@@ -57,6 +57,11 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
     // Find a list of ownedresources
     $scope.find = function () {
       $scope.ownedresources = Ownedresources.query();
+    };
+
+    // Find a list of ownedresources
+    $scope.findResources = function () {
+      $scope.resourcelist = Resources.query();
     };
 
     // Find existing ownedresource
