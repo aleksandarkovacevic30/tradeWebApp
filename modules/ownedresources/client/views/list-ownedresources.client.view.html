@@ -11,7 +11,7 @@
         <span data-ng-bind="ownedresource.user.username"></span>
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="ownedresource.resource.name"></h4>
-      <p class="list-group-item-text" data-ng-bind="ownedresource.amount"></p>
+      Amount: <p class="list-group-item-text" data-ng-bind="ownedresource.count"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="ownedresources.$resolved && !ownedresources.length">

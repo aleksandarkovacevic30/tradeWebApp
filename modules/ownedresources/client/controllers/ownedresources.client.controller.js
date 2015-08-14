@@ -11,7 +11,7 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
       
       var ownedresource = new Ownedresources({
         resource: this.resource,
-        amount: this.amount
+        count: this.count
       });
 
       // Redirect after save
@@ -20,7 +20,7 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
 
         // Clear form fields
         $scope.name = '';
-        $scope.amount = 0;
+        $scope.count = 0;
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

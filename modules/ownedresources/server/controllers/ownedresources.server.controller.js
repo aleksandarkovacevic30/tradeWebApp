@@ -15,7 +15,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var ownedresource = new Ownedresource({
     resource: req.body.resource,
-    amount: req.body.amount
+    count: req.body.count
   });
   ownedresource.user = req.user;
 
@@ -43,8 +43,8 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var ownedresource = req.ownedresource;
 
-  ownedresource.title = req.body.title;
-  ownedresource.content = req.body.content;
+  ownedresource.resource = req.body.resource;
+  ownedresource.count = req.body.count;
 
   ownedresource.save(function (err) {
     if (err) {
