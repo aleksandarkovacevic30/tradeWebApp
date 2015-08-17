@@ -11,20 +11,21 @@ var TradeSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
-  },
-  content: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  user: {
+  user1: {
     type: Schema.ObjectId,
-    ref: 'User'
+    required: 'User 1 cannot be blank'
+  },
+  user2: {
+    type: Schema.ObjectId,
+    required: 'User 2 cannot be blank'
+  },
+  resource1: {
+    type: Schema.ObjectId,
+    required: 'Resoruce 1 cannot be blank'
+  },
+  resource2: {
+    type: Schema.ObjectId,
+    required: 'Resoruce 2 cannot be blank'
   }
 });
 /**

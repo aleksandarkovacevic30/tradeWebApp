@@ -78,7 +78,7 @@ exports.delete = function (req, res) {
  * List of ownedresources
  */
 exports.list = function (req, res) {
-  Ownedresource.find().sort('-created').populate('user', 'username').populate('resource','name').exec(function (err, ownedresources) {
+  Ownedresource.find({user:req.user}).sort('-created').populate('user', 'username').populate('resource','name').exec(function (err, ownedresources) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -100,7 +100,7 @@ exports.ownedresourceByID = function (req, res, next, id) {
     });
   }
 
-  Ownedresource.findById(id).populate('user', 'displayName').exec(function (err, ownedresource) {
+  Ownedresource.findById(id).populate('user', 'username').populate('resource','name').exec(function (err, ownedresource) {
     if (err) {
       return next(err);
     } else if (!ownedresource) {

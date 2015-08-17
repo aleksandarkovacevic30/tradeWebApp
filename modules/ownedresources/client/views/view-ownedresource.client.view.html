@@ -1,6 +1,6 @@
 <section data-ng-controller="ownedresourcesController" data-ng-init="findOne()">
   <div class="page-header">
-    <h1 data-ng-bind="ownedresource.title"></h1>
+    <h1 data-ng-bind="ownedresource.resource.name"></h1>
   </div>
   <div class="pull-right" data-ng-show="authentication.user._id == ownedresource.user._id">
     <a class="btn btn-primary" data-ui-sref="ownedresources.edit({ownedresourceId: ownedresource._id})">
@@ -18,5 +18,5 @@
       <span data-ng-bind="ownedresource.user.username"></span>
     </em>
   </small>
-  <p class="lead" data-ng-bind="ownedresource.amount"></p>
+  <p class="lead" data-ng-bind="ownedresource.count"></p>
 </section>
