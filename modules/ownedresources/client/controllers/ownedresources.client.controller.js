@@ -1,8 +1,8 @@
 'use strict';
 
 // ownedresources controller
-angular.module('ownedresources').controller('ownedresourcesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Ownedresources','Resources',
-  function ($scope, $stateParams, $location, Authentication, Ownedresources, Resources) {
+angular.module('ownedresources').controller('ownedresourcesController', ['$scope', '$filter', '$stateParams', '$location', 'Authentication', 'Ownedresources','Resources',
+  function ($scope, $filter, $stateParams, $location, Authentication, Ownedresources, Resources) {
     $scope.authentication = Authentication;
 
     // Create new ownedresource
@@ -60,6 +60,11 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
     };
 
     // Find a list of ownedresources
+    $scope.findOwnedresources = function () {
+      $scope.ownedresources = Ownedresources.query({userFound: false});
+    };
+    
+    // Find a list of ownedresources
     $scope.findResources = function () {
       $scope.resourcelist = Resources.query();
     };
@@ -70,5 +75,26 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
         ownedresourceId: $stateParams.ownedresourceId
       });
     };
+    $scope.buildPager = function () {
+      $scope.pagedItems = [];
+      $scope.itemsPerPage = 15;
+      $scope.currentPage = 1;
+      $scope.figureOutItemsToDisplay();
+    };
+
+    $scope.figureOutItemsToDisplay = function () {
+      $scope.filteredItems = $filter('filter')($scope.ownedresources, {
+        $: $scope.search
+      });
+      $scope.filterLength = $scope.filteredItems.length;
+      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+      var end = begin + $scope.itemsPerPage;
+      $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+    };
+
+    $scope.pageChanged = function () {
+      $scope.figureOutItemsToDisplay();
+    };
+
   }
 ]);

@@ -12,6 +12,10 @@ module.exports = function (app) {
     .get(ownedresources.list)
     .post(ownedresources.create);
 
+    // Ownedresources collection routes
+  app.route('/api/ownedresources/all').all(ownedresourcesPolicy.isAllowed)
+    .get(ownedresources.listAll);
+
   // Single ownedresource routes
   app.route('/api/ownedresources/:ownedresourceId').all(ownedresourcesPolicy.isAllowed)
     .get(ownedresources.read)

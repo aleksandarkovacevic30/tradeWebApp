@@ -16,6 +16,13 @@ angular.module('trades').run(['Menus',
       state: 'trades.list'
     });
 
+        // Add the dropdown list item
+    Menus.addSubMenuItem('topbar', 'trades', {
+      title: 'List Resources',
+      state: 'ownedresources.listRes'
+    });
+
+    
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'trades', {
       title: 'Create trades',

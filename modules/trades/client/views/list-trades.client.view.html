@@ -8,12 +8,15 @@
         Posted on
         <span data-ng-bind="trade.created | date:'mediumDate'"></span>
         by
-        <span data-ng-bind="trade.user.username"></span>
+        <span data-ng-bind="trade.user1.username"></span>
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="trade.resource1.name"></h4>
       <p class="list-group-item-text" data-ng-bind="trade.user1.username"></p>
       <h4 class="list-group-item-heading" data-ng-bind="trade.resource2.name"></h4>
       <p class="list-group-item-text" data-ng-bind="trade.user2.username"></p>
+      <a class="btn btn-primary" data-ng-click="remove();">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="trades.$resolved && !trades.length">
