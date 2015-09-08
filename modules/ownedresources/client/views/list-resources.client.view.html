@@ -1,9 +1,16 @@
 <section data-ng-controller="ownedresourcesController" data-ng-init="findOwnedresources()">
   <div class="page-header">
-    <h1>ownedresources 123</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <h1>ownedresources 123</h1>
+      </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <input class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+      </div>
+    </div>
   </div>
   <div class="list-group">
-    <a data-ng-repeat="ownedresource in ownedresources" data-ui-sref="ownedresources.view({ownedresourceId: ownedresource._id})" class="list-group-item">
+    <a data-ng-repeat="ownedresource in pagedItems" data-ui-sref="ownedresources.view({ownedresourceId: ownedresource._id})" class="list-group-item">12
       <small class="list-group-item-text">
         Created on
         <span data-ng-bind="ownedresource.created | date:'mediumDate'"></span>
@@ -14,6 +21,7 @@
       Amount: <p class="list-group-item-text" data-ng-bind="ownedresource.count"></p>
     </a>
   </div>
+  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
   <div class="alert alert-warning text-center" data-ng-if="ownedresources.$resolved && !ownedresources.length">
     No ownedresources yet, why don't you <a data-ui-sref="ownedresources.create">create one</a>?
   </div>

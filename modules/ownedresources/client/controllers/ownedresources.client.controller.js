@@ -4,6 +4,11 @@
 angular.module('ownedresources').controller('ownedresourcesController', ['$scope', '$filter', '$stateParams', '$location', 'Authentication', 'Ownedresources','Resources',
   function ($scope, $filter, $stateParams, $location, Authentication, Ownedresources, Resources) {
     $scope.authentication = Authentication;
+    
+    Ownedresources.query(function (data) {
+      $scope.ownedresources = data;
+      $scope.buildPager();
+    });
 
     // Create new ownedresource
     $scope.create = function () {
@@ -61,7 +66,9 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
 
     // Find a list of ownedresources
     $scope.findOwnedresources = function () {
-      $scope.ownedresources = Ownedresources.query({userFound: false});
+      $scope.ownedresources = Ownedresources.query();
+      console.log('test ownedResources here:'+$scope.ownedresources);
+      $scope.buildPager();
     };
     
     // Find a list of ownedresources
@@ -83,6 +90,7 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
     };
 
     $scope.figureOutItemsToDisplay = function () {
+      console.log('check owned:'+$scope.ownedresources);
       $scope.filteredItems = $filter('filter')($scope.ownedresources, {
         $: $scope.search
       });
