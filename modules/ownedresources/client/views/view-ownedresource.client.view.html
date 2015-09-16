@@ -1,6 +1,11 @@
 <section data-ng-controller="ownedresourcesController" data-ng-init="findOne()">
   <div class="page-header">
     <h1 data-ng-bind="ownedresource.resource.name"></h1>
+    <div class="col-md-4">
+       <a class="btn btn-primary" data-ng-click="take();" ng-if="user._id !== authentication.user._id">
+         <i class="glyphicon glyphicon-trash"></i>
+       </a>
+    </div>
   </div>
   <div class="pull-right" data-ng-show="authentication.user._id == ownedresource.user._id">
     <a class="btn btn-primary" data-ui-sref="ownedresources.edit({ownedresourceId: ownedresource._id})">
