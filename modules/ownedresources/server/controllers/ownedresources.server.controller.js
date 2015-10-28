@@ -58,6 +58,29 @@ exports.update = function (req, res) {
 };
 
 /**
+ * Take one 
+ */
+exports.takeOne = function (req, res) {
+  var ownedresource = req.ownedresource;
+
+  ownedresource.resource = req.body.resource;
+  ownedresource.count = req.body.count;
+  
+  if (ownedresource.count>0) ownedresource.count--;
+
+  ownedresource.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(ownedresource);
+    }
+  });
+};
+
+
+/**
  * Delete an ownedresource
  */
 exports.delete = function (req, res) {

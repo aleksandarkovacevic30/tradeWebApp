@@ -18,12 +18,8 @@ angular.module('ownedresources').config(['$stateProvider',
         templateUrl: 'modules/ownedresources/views/list-ownedresources.client.view.html'
       })
       .state('ownedresources.listRes', {
-        url: '/all',
+        url: '/allRes',
         templateUrl: 'modules/ownedresources/views/list-resources.client.view.html'
-      })
-      .state('ownedresources.create', {
-        url: '/create',
-        templateUrl: 'modules/ownedresources/views/create-ownedresource.client.view.html'
       })
       .state('ownedresources.view', {
         url: '/:ownedresourceId',

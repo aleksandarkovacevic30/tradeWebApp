@@ -10,6 +10,11 @@ angular.module('ownedresources').controller('ownedresourcesController', ['$scope
       $scope.buildPager();
     });
 
+    $scope.takeOne = function () {
+      confirm('da li si kreten');
+      console.log('implement this action: takeOne');
+    };
+    
     // Create new ownedresource
     $scope.create = function () {
       // Create new ownedresource object

@@ -1,12 +1,40 @@
 'use strict';
 
 // trades controller
-angular.module('trades').controller('tradesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Trades',
-  function ($scope, $stateParams, $location, Authentication, Trades) {
+angular.module('trades').controller('tradesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Trades','Ownedresource',
+  function ($scope, $stateParams, $location, Authentication, Trades, Ownedresource) {
     $scope.authentication = Authentication;
 
+    /**
+ * List of ownedresources, move functionality to proper controller.
+ */
+/*exports.list = function (req, res) {
+  Ownedresource.find().sort('-created').populate('user', 'username').populate('resource','name').exec(function (err, ownedresources) {
+    if (err) {
+      return res.status(400).send({
+        message: 'error'
+      });
+    } else {
+      res.json(ownedresources);
+    }
+  });
+};*/
+    
+    
+     $scope.create = function (Ownedresource,Authentication) {
+      if (confirm('Are you sure you want to take this resource?')) {
+        if (Ownedresource) {
+          Ownedresource.$takeOne();
+          Trades.$create(Ownedresource, Authentication.user);
+        }/* else {
+        }*/
+      }
+    };
+
+    
     // Create new trade
-    $scope.create = function () {
+/*    $scope.create = function () {
+      console.log('teste test test: create invooked!');
       // Create new trade object
       var trade = new Trades({
         title: this.title,
@@ -24,7 +52,7 @@ angular.module('trades').controller('tradesController', ['$scope', '$stateParams
         $scope.error = errorResponse.data.message;
       });
     };
-
+*/
     // Remove existing trade
     $scope.remove = function (trade) {
       if (trade) {

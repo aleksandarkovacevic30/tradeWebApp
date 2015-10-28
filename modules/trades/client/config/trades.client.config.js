@@ -21,12 +21,5 @@ angular.module('trades').run(['Menus',
       title: 'List Resources',
       state: 'ownedresources.listRes'
     });
-
-    
-    // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'trades', {
-      title: 'Create trades',
-      state: 'trades.create'
-    });
   }
 ]);
